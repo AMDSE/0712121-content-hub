@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://0712121.xyz/sitemap-index.xml

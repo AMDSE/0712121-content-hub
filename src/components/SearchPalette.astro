@@ -1,0 +1,31 @@
+---
+import { getSiteContent } from '../lib/directus';
+
+const { searchItems } = await getSiteContent();
+---
+
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-title">
+  <div class="search-shell">
+    <header class="search-header">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+      <label id="search-title" class="sr-only" for="site-search-input">搜索站内内容</label>
+      <input id="site-search-input" type="search" placeholder="搜索文章、专题或实验…" autocomplete="off" data-search-input />
+      <button type="button" data-search-close><kbd>ESC</kbd><span class="sr-only">关闭搜索</span></button>
+    </header>
+    <div class="search-body">
+      <p class="search-hint" data-search-hint>输入关键词，或从最近内容开始探索</p>
+      <ul class="search-results" data-search-results>
+        {searchItems.map((item) => (
+          <li data-search-item data-terms={`${item.title} ${item.description} ${item.type} ${item.keywords}`.toLocaleLowerCase('zh-CN')}>
+            <a href={item.href}>
+              <span class="search-type">{item.type}</span>
+              <span><strong>{item.title}</strong><small>{item.description}</small></span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="search-empty" data-search-empty hidden>没有找到匹配内容，换个词试试。</p>
+    </div>
+  </div>
+</dialog>

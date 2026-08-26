@@ -1,0 +1,25 @@
+---
+import type { Post } from '../data/content';
+import { formatDate } from '../data/content';
+
+interface Props {
+  post: Post;
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props;
+---
+
+<article class:list={['post-card', `accent-${post.accent}`, { compact }]}>
+  <a class="post-card-link" href={`/notes/${post.slug}/`} aria-label={post.title}></a>
+  <div class="post-card-top">
+    <span class="category-pill">{post.category}</span>
+    <span class="post-arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3>{post.title}</h3>
+  {!compact && <p>{post.excerpt}</p>}
+  <div class="post-card-meta">
+    <time datetime={post.date}>{formatDate(post.date)}</time>
+    <span>{post.readingTime}</span>
+  </div>
+</article>

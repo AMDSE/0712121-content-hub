@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PostCard from '../components/PostCard.astro';
+import { getSiteContent } from '../lib/directus';
+
+const { categories, posts, projects, series, settings } = await getSiteContent();
+const featuredPost = posts.find((post) => post.featured) ?? posts[0];
+const latestPosts = posts.filter((post) => !post.featured).slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy" data-reveal>
+      <div class="hero-kicker">
+        <span class="live-dot"></span>
+        <span>{settings.heroKicker}</span>
+        <span>EST. 2026</span>
+      </div>
+      <h1 id="hero-title">
+        在数字世界里，<br />
+        建一座<span class="circled-word">持续生长<svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="150" cy="45" rx="145" ry="38"></ellipse></svg></span>的<br />
+        个人资料库。
+      </h1>
+      <p class="hero-intro">{settings.heroDescription}</p>
+      <div class="hero-actions">
+        <a class="primary-button" href="#start">开始探索 <span>→</span></a>
+        <button class="text-button" type="button" data-search-open>搜索全部内容 <kbd>⌘ K</kbd></button>
+      </div>
+    </div>
+
+    <div class="signal-panel" data-reveal>
+      <div class="panel-label"><span>LIVE MAP</span><span>07:12:21</span></div>
+      <svg class="signal-map" viewBox="0 0 640 580" role="img" aria-label="文章、专题和实验相互连接的抽象关系图">
+        <defs>
+          <filter id="softGlow"><feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur><feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+        </defs>
+        <g class="map-grid">
+          <path d="M90 40v500M190 40v500M290 40v500M390 40v500M490 40v500M590 40v500"></path>
+          <path d="M50 90h550M50 190h550M50 290h550M50 390h550M50 490h550"></path>
+        </g>
+        <g class="map-lines">
+          <path d="M118 172 278 94 463 163 529 338 394 471 188 431 89 309Z"></path>
+          <path d="M118 172 394 471M278 94 188 431M463 163 89 309M529 338 118 172"></path>
+          <path d="M278 94 394 471 463 163 188 431 529 338"></path>
+        </g>
+        <g class="map-orbits">
+          <circle cx="322" cy="284" r="188"></circle>
+          <circle cx="322" cy="284" r="118"></circle>
+          <circle cx="322" cy="284" r="52"></circle>
+        </g>
+        <g class="map-nodes">
+          <g transform="translate(118 172)"><circle r="13"></circle><text x="20" y="5">SERVER</text></g>
+          <g transform="translate(278 94)"><circle r="9"></circle><text x="16" y="4">AIGC</text></g>
+          <g transform="translate(463 163)"><circle r="12"></circle><text x="19" y="5">DESIGN</text></g>
+          <g transform="translate(529 338)"><circle r="8"></circle><text x="-66" y="27">NOTES</text></g>
+          <g transform="translate(394 471)"><circle r="11"></circle><text x="18" y="5">LAB</text></g>
+          <g transform="translate(188 431)"><circle r="8"></circle><text x="16" y="5">TOOLS</text></g>
+          <g transform="translate(89 309)"><circle r="10"></circle><text x="18" y="5">IDEAS</text></g>
+          <g class="core" transform="translate(322 284)" filter="url(#softGlow)"><circle r="27"></circle><text text-anchor="middle" y="5">07</text></g>
+        </g>
+      </svg>
+      <div class="panel-note">
+        <span>当前坐标</span>
+        <strong>31.2304° N<br />121.4737° E</strong>
+      </div>
+      <div class="panel-stats"><span>文章 <strong>{String(settings.contentTotal).padStart(3, '0')}</strong></span><span>专题 <strong>{String(series.length).padStart(2, '0')}</strong></span><span>实验 <strong>{String(projects.length).padStart(2, '0')}</strong></span></div>
+    </div>
+  </section>
+
+  <nav class="entry-board" id="start" aria-label="快速探索">
+    <div class="entry-board-intro">
+      <span class="eyebrow">CHOOSE A PATH</span>
+      <strong>从哪里<br />开始？</strong>
+      <small>04 条探索路径</small>
+    </div>
+    <a href="/notes/?category=建站与服务器" class="accent-lime">
+      <span>01</span><div><strong>搭一台服务器</strong><small>从购买 VPS 到自动部署</small></div><i>↗</i>
+    </a>
+    <a href="/notes/?category=AIGC与工作流" class="accent-blue">
+      <span>02</span><div><strong>整理 AI 工作流</strong><small>工具、方法与现场笔记</small></div><i>↗</i>
+    </a>
+    <a href="/lab/" class="accent-orange">
+      <span>03</span><div><strong>逛逛实验室</strong><small>能运行的小工具与想法</small></div><i>↗</i>
+    </a>
+    <a href="/notes/" class="accent-pink">
+      <span>04</span><div><strong>浏览全部索引</strong><small>按主题寻找所有内容</small></div><i>↗</i>
+    </a>
+  </nav>
+
+  <div class="marquee" aria-hidden="true">
+    <div>
+      <span>ASTRO</span><i>✦</i><span>DIRECTUS</span><i>✦</i><span>AIGC</span><i>✦</i><span>DESIGN</span><i>✦</i><span>SELF-HOSTED</span><i>✦</i><span>DIGITAL GARDEN</span><i>✦</i>
+      <span aria-hidden="true">ASTRO</span><i aria-hidden="true">✦</i><span aria-hidden="true">DIRECTUS</span><i aria-hidden="true">✦</i><span aria-hidden="true">AIGC</span><i aria-hidden="true">✦</i><span aria-hidden="true">DESIGN</span><i aria-hidden="true">✦</i><span aria-hidden="true">SELF-HOSTED</span><i aria-hidden="true">✦</i><span aria-hidden="true">DIGITAL GARDEN</span><i aria-hidden="true">✦</i>
+    </div>
+  </div>
+
+  <section class="content-section latest-section" data-reveal>
+    <SectionHeading number="01" eyebrow="LATEST NOTES" title="最近在写" href="/notes/" />
+    <div class="latest-grid">
+      <article class="featured-story accent-lime">
+        <a class="story-link" href={`/notes/${featuredPost.slug}/`} aria-label={featuredPost.title}></a>
+        <div class="story-visual">
+          <div class="terminal-card" aria-hidden="true">
+            <div class="terminal-top"><span></span><span></span><span></span><em>deploy.log</em></div>
+            <code><b>$</b> astro build<br /><span>✓</span> 18 pages generated<br /><span>✓</span> assets optimized<br /><span>✓</span> deployed to edge<br /><i>ready in 1.42s</i></code>
+          </div>
+          <span class="visual-stamp">FIELD NOTE<br />NO. 001</span>
+        </div>
+        <div class="story-copy">
+          <span class="category-pill">{featuredPost.category}</span>
+          <h3>{featuredPost.title}</h3>
+          <p>{featuredPost.excerpt}</p>
+          <div class="story-meta"><span>{featuredPost.date}</span><span>{featuredPost.readingTime}</span><span aria-hidden="true">↗</span></div>
+        </div>
+      </article>
+      <div class="latest-list">
+        {latestPosts.map((post) => <PostCard post={post} compact />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section series-section" data-reveal>
+    <SectionHeading number="02" eyebrow="ONGOING SERIES" title="持续专题" href="/series/" />
+    <div class="series-list">
+      {series.map((item, index) => (
+        <article class:list={['series-row', `accent-${item.accent}`]} id={item.slug}>
+          <a class="story-link" href={`/series/#${item.slug}`} aria-label={item.title}></a>
+          <span class="series-number">{String(index + 1).padStart(2, '0')}</span>
+          <div class="series-main"><span class="series-status"><i></i>{item.status}</span><h3>{item.title}</h3><p>{item.description}</p></div>
+          <div class="series-count"><strong>{String(item.issueCount).padStart(2, '0')}</strong><span>篇内容</span></div>
+          <span class="series-arrow" aria-hidden="true">↗</span>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-section lab-section" data-reveal>
+    <SectionHeading number="03" eyebrow="PLAYGROUND" title="实验与作品" href="/lab/" linkLabel="进入实验室" />
+    <div class="project-grid">
+      {projects.map((project, index) => (
+        <article class:list={['project-card', `accent-${project.accent}`]} id={project.slug}>
+          <a class="story-link" href={`/lab/#${project.slug}`} aria-label={project.title}></a>
+          <div class="project-art" aria-hidden="true">
+            <span class="project-mark">{project.mark}</span>
+            <span class="project-index">0{index + 1}</span>
+            <div class="art-orbit"></div><div class="art-dot"></div>
+          </div>
+          <div class="project-copy"><span>{project.label}</span><h3>{project.title}</h3><p>{project.description}</p></div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-section index-section" data-reveal>
+    <SectionHeading number="04" eyebrow="KNOWLEDGE INDEX" title="从哪里开始？" href="/notes/" linkLabel="打开全部索引" />
+    <div class="category-layout">
+      <div class="category-intro">
+        <p>这里不是一条阅后即逝的信息流。每篇内容都会进入一个长期维护的主题，旧文章也会持续修订和互相连接。</p>
+        <div class="index-total"><strong>{String(settings.contentTotal).padStart(3, '0')}</strong><span>条公开内容<br />仍在增加</span></div>
+      </div>
+      <div class="category-list">
+        {categories.map((category, index) => (
+          <a href={`/notes/?category=${encodeURIComponent(category.name)}`}>
+            <span>{String(index + 1).padStart(2, '0')}</span><strong>{category.name}</strong><em>{category.code}</em><b>{category.count}</b><i>→</i>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="now-strip" data-reveal>
+    <div><span class="status-dot"></span><p class="eyebrow">NOW / 2026.08</p></div>
+    <p>正在把这座站点从零搭起来：内容放在 Directus，页面交给 Astro，图片住进 R2，最后由 Cloudflare 把它送到每一位访客面前。</p>
+    <a href="/about/">关于这座站点 ↗</a>
+  </section>
+</BaseLayout>

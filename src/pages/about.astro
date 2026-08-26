@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteContent } from '../lib/directus';
+
+const { settings } = await getSiteContent();
+---
+
+<BaseLayout title="关于 — 0712121" description="关于 0712121 个人内容中枢及其技术架构。">
+  <header class="archive-hero about-hero">
+    <p class="eyebrow">ABOUT THIS PLACE / 04</p>
+    <h1>一个人的站点，<br />也可以拥有自己的<em>宇宙。</em></h1>
+  </header>
+  <section class="about-grid">
+    <div class="about-lead"><span>{settings.siteName}</span><p>{settings.aboutText}</p></div>
+    <div class="about-copy">
+      <h2>这座站点如何工作</h2>
+      <p>内容在自己的 Directus 后台编辑，数据保存于 PostgreSQL，图片进入 Cloudflare R2。发布时触发 Astro 构建，最终生成的静态页面由 Cloudflare Pages 与全球 CDN 提供。</p>
+      <div class="stack-diagram"><span>DIRECTUS<small>编辑</small></span><i>→</i><span>ASTRO<small>生成</small></span><i>→</i><span>CF PAGES<small>分发</small></span></div>
+      <h2>设计原则</h2>
+      <ul><li>内容优先，但不牺牲个性。</li><li>静态优先，把动态能力留给真正需要的地方。</li><li>速度、可访问性和移动端体验从一开始就考虑。</li><li>结构允许站点长期生长，而不是每次改版推倒重来。</li></ul>
+    </div>
+  </section>
+</BaseLayout>

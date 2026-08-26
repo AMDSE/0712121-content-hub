@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSiteContent } from '../../lib/directus';
+
+const { series } = await getSiteContent();
+---
+
+<BaseLayout title="持续专题 — 0712121" description="围绕服务器、AI 工作流与 Web 实验持续更新的系列内容。">
+  <header class="archive-hero series-hero">
+    <p class="eyebrow">ONGOING SERIES / 02</p>
+    <h1>有些问题，值得<br /><em>慢慢写完。</em></h1>
+    <p>专题把分散的文章组织成连续路径。你可以从头阅读，也可以从任意一期加入。</p>
+  </header>
+  <section class="series-archive">
+    {series.map((item, index) => (
+      <article class:list={['series-detail', `accent-${item.accent}`]} id={item.slug}>
+        <span class="series-detail-index">0{index + 1}</span>
+        <div><span class="series-status"><i></i>{item.status}</span><h2>{item.title}</h2><p>{item.description}</p></div>
+        <div class="series-progress"><span><b style={`--progress:${Math.min(item.issueCount * 7, 92)}%`}></b></span><small>已发布 {item.issueCount} 篇</small></div>
+        <a href="/notes/">查看内容 ↗</a>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

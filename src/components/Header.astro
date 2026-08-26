@@ -1,0 +1,55 @@
+---
+const pathname = Astro.url.pathname;
+const navItems = [
+  { href: '/', label: '首页' },
+  { href: '/notes/', label: '笔记' },
+  { href: '/series/', label: '专题' },
+  { href: '/lab/', label: '实验室' },
+  { href: '/about/', label: '关于' },
+];
+
+const isCurrent = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="site-header" data-site-header>
+  <a class="brand" href="/" aria-label="0712121 首页">
+    <span class="brand-mark" aria-hidden="true">07</span>
+    <span class="brand-copy">
+      <strong>0712121</strong>
+      <small>PERSONAL INDEX</small>
+    </span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="主导航">
+    {navItems.map((item) => (
+      <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+        {item.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="header-actions">
+    <button class="icon-button search-button" type="button" data-search-open aria-label="打开站内搜索">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+      <span>搜索</span>
+      <kbd>⌘ K</kbd>
+    </button>
+    <button class="icon-button theme-button" type="button" data-theme-toggle aria-label="切换深色模式">
+      <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"></path></svg>
+    </button>
+    <button class="menu-button" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+      <span class="sr-only">打开导航</span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航">
+    {navItems.map((item, index) => (
+      <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+        <span>0{index + 1}</span>{item.label}
+      </a>
+    ))}
+  </nav>
+</header>

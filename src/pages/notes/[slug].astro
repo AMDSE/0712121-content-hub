@@ -15,7 +15,10 @@ const { post } = Astro.props;
 <BaseLayout title={`${post.title} — 0712121`} description={post.excerpt} type="article">
   <article class="article-page">
     <header class:list={['article-header', `accent-${post.accent}`]}>
-      <a class="article-back" href="/notes/">← 返回全部笔记</a>
+      <div class="article-header-top">
+        <a class="article-back" href="/notes/">← 返回全部笔记</a>
+        <span class="article-folio">FIELD NOTE / 0712121</span>
+      </div>
       <span class="category-pill">{post.category}</span>
       <h1>{post.title}</h1>
       <p>{post.excerpt}</p>

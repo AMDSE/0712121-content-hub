@@ -26,7 +26,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.u
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f2efe7" />
+    <meta name="theme-color" content="#f3eee3" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
@@ -60,7 +60,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.u
       const syncThemeLabel = () => {
         const isDark = root.dataset.theme === 'dark';
         themeButtons.forEach((button) => button.setAttribute('aria-label', isDark ? '切换浅色模式' : '切换深色模式'));
-        themeColor?.setAttribute('content', isDark ? '#151614' : '#f2efe7');
+        themeColor?.setAttribute('content', isDark ? '#11110f' : '#f3eee3');
       };
       syncThemeLabel();
       themeButtons.forEach((button) => {

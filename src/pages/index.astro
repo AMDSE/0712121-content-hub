@@ -77,12 +77,15 @@ const latestPosts = posts.filter((post) => post.slug !== featuredPost?.slug).sli
     </a>
   </nav>
 
-  <div class="marquee" aria-hidden="true">
-    <div>
-      <span>ASTRO</span><i>✦</i><span>DIRECTUS</span><i>✦</i><span>SELF-HOSTED</span><i>✦</i><span>FIELD NOTES</span><i>✦</i><span>EXPERIMENTS</span><i>✦</i><span>DIGITAL ARCHIVE</span><i>✦</i>
-      <span>ASTRO</span><i>✦</i><span>DIRECTUS</span><i>✦</i><span>SELF-HOSTED</span><i>✦</i><span>FIELD NOTES</span><i>✦</i><span>EXPERIMENTS</span><i>✦</i><span>DIGITAL ARCHIVE</span><i>✦</i>
+  <section class="site-rail" aria-label="站点概览">
+    <div class="site-rail-status">
+      <span class="status-dot"></span>
+      <span><strong>站点在线</strong><small>静态页面由边缘网络分发</small></span>
     </div>
-  </div>
+    <a href="/notes/"><strong>{String(settings.contentTotal).padStart(3, '0')}</strong><span>公开笔记</span><i>↗</i></a>
+    <a href="/series/"><strong>{String(series.length).padStart(2, '0')}</strong><span>持续专题</span><i>↗</i></a>
+    <a href="/lab/"><strong>{String(projects.length).padStart(2, '0')}</strong><span>实验项目</span><i>↗</i></a>
+  </section>
 
   <section class="content-section latest-section" data-reveal>
     <SectionHeading number="01" eyebrow="NEW IN THE ARCHIVE" title="刚整理好的档案" href="/notes/" />

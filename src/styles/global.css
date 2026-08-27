@@ -322,8 +322,19 @@
   .prose { font-family: var(--serif); font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.95; }
   .prose .lead { font-size: clamp(1.35rem, 2vw, 1.85rem); line-height: 1.65; }
   .prose h2 { margin: 2.6em 0 .7em; font-family: var(--sans); font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.15; letter-spacing: -.04em; }
+  .prose h3 { margin: 2em 0 .65em; font-family: var(--sans); font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.25; letter-spacing: -.025em; }
+  .prose p, .prose ul, .prose ol, .prose table { margin: 1.15em 0; }
+  .prose ul, .prose ol { padding-left: 1.4em; }
+  .prose li + li { margin-top: .45em; }
+  .prose a { color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+  .prose a:hover { color: var(--ink); background: var(--lime); }
+  .prose code:not(pre code) { padding: .12em .35em; border: 1px solid var(--line); background: var(--paper-2); font: .82em/1.5 monospace; overflow-wrap: anywhere; }
   .prose blockquote { margin: 2.5em 0; padding: 28px; border-left: 7px solid var(--blue); background: var(--paper-2); font-size: 1.35em; line-height: 1.55; }
   .prose pre { max-width: 100%; overflow-x: auto; margin: 2em 0; padding: 24px; background: var(--black); color: var(--lime); font: .78em/1.7 monospace; }
+  .prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-family: var(--sans); font-size: .78em; line-height: 1.55; }
+  .prose th, .prose td { min-width: 150px; padding: 12px 14px; border: 1px solid var(--line-strong); text-align: left; vertical-align: top; }
+  .prose th { background: var(--ink); color: var(--paper); font-size: .85em; letter-spacing: .04em; }
+  .prose tbody tr:nth-child(even) { background: var(--paper-2); }
 
   .series-archive, .lab-archive, .about-grid { margin-inline: var(--page-pad); padding-block: clamp(70px, 10vw, 150px); }
   .series-detail { --accent: var(--lime); display: grid; grid-template-columns: 100px 1.3fr .7fr auto; gap: 40px; align-items: center; min-height: 240px; padding: 35px; border-top: 1px solid var(--ink); }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astro + Directus 建站"
+  short_description: "指导 Agent 安全部署小型 VPS 内容中枢并完成自动发布"
+  default_prompt: "Use $build-astro-directus-content-hub to guide me through deploying an Astro and Directus content hub on a small VPS."

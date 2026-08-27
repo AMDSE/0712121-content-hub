@@ -1,6 +1,10 @@
 import type { Accent, Post, Project, Series } from '../data/content';
 
-const DIRECTUS_URL = (import.meta.env.DIRECTUS_URL || 'https://admin.0712121.xyz').replace(/\/$/, '');
+const DEFAULT_DIRECTUS_URL = 'https://admin.0712121.xyz';
+const configuredDirectusUrl = (import.meta.env.DIRECTUS_URL || DEFAULT_DIRECTUS_URL).replace(/\/$/, '');
+const DIRECTUS_URL = configuredDirectusUrl === 'https://api.0712121.xyz'
+  ? DEFAULT_DIRECTUS_URL
+  : configuredDirectusUrl;
 
 export interface Category {
   id: number;
